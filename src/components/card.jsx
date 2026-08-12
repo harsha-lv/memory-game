@@ -51,7 +51,7 @@ function Card({ name, onSelect, disabled }) {
   return (
     <button
       type="button"
-      className="card"
+      className="min-h-[220px] flex-[0_1_180px] cursor-pointer overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100 p-0 text-left font-semibold capitalize text-zinc-900 shadow-md transition hover:-translate-y-1 hover:shadow-lg disabled:cursor-default disabled:hover:translate-y-0 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100"
       onClick={onSelect}
       disabled={disabled}
       aria-label={`Select ${label}`}
@@ -60,12 +60,12 @@ function Card({ name, onSelect, disabled }) {
         <img
           src={cardSrc}
           alt=""
-          className={usingFallback ? 'fallback-still' : undefined}
+          className={`block aspect-square w-full object-cover ${usingFallback ? 'bg-zinc-900' : ''}`}
           onError={handleImageError}
         />
       )}
-      {!cardSrc && !usingFallback && <div>Loading {label}…</div>}
-      <div>{label}</div>
+      {!cardSrc && !usingFallback && <div className="p-3">Loading {label}…</div>}
+      <div className="p-3">{label}</div>
     </button>
   )
 }
