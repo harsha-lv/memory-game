@@ -1,16 +1,57 @@
-# React + Vite
+# Resident Evil Memory
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A browser memory game. Click every Resident Evil character once. Click the same card twice and the round ends.
 
-Currently, two official plugins are available:
+Portraits come from [Giphy](https://developers.giphy.com/). If a GIF cannot be loaded, the card uses a local still from `src/images`.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Play
 
-## React Compiler
+- Click a character you have not picked yet to score a point.
+- The board shuffles after every successful pick.
+- Repeat a card and the round is over.
+- Clear all 20 characters to win.
+- Best score is kept until you refresh the page.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Stack
 
-## Expanding the ESLint configuration
+- [React](https://react.dev/) 19
+- [Vite](https://vite.dev/) 8
+- [Tailwind CSS](https://tailwindcss.com/) 4
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Setup
+
+```bash
+npm install
+npm run dev
+```
+
+Then open the URL Vite prints (usually `http://localhost:5173`).
+
+| Script | What it does |
+| --- | --- |
+| `npm run dev` | Start the dev server |
+| `npm run build` | Production build |
+| `npm run preview` | Preview the production build |
+| `npm run lint` | Run ESLint |
+
+## Giphy key
+
+Searches are `{character name} resident evil`. The phrase is not shown on the card.
+
+To use your own key, create a `.env.local` file:
+
+```bash
+VITE_GIPHY_API_KEY=your_key_here
+```
+
+Get a key from the [Giphy developers site](https://developers.giphy.com/).
+
+## Fallback stills
+
+When Giphy is rate-limited or a GIF URL fails, the card looks in `src/images` for a matching file:
+
+- first name (`leon kennedy` → `leon.jpg`)
+- hyphenated full name (`william birkin` → `william-birkin.png`)
+- aliases (`mr x` → `x.jpg`, `lady dimitrescu` → `lady.jpg`)
+
+`.jpg`, `.jpeg`, and `.png` are all accepted.
